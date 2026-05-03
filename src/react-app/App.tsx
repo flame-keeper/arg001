@@ -1,64 +1,74 @@
-// src/App.tsx
-
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
-import honoLogo from "./assets/hono.svg";
 import "./App.css";
 
+// 型定義（以前作成したもの）
+type SearchResponse = {
+	success: boolean;
+	results: { url: string }[];
+	message?: string;
+};
+
 function App() {
-	const [count, setCount] = useState(0);
-	const [name, setName] = useState("unknown");
+	// inputの値を React の状態として管理する
+	const [keyword, setKeyword] = useState("");
+	const [results, setResults] = useState<SearchResponse | null>(null);
+
+	const handleSearch = async () => {
+		if (!keyword) return;
+
+		// ✅ ポイント1: URLSearchParams には「キー(q)」と「値(keyword)」をセットで渡す
+		const params = new URLSearchParams({ q: keyword });
+
+		// ✅ ポイント2: search の後のスラッシュの有無を Hono 側と合わせる
+		// 恐らくサーバー側は /api/search なので、/api/search?q=... にする
+		const url = `/api/search?${params.toString()}`;
+
+		try {
+			const res = await fetch(url);
+			const data = (await res.json()) as SearchResponse;
+			setResults(data);
+		} catch (e) {
+			console.error("通信失敗", e);
+		}
+	};
 
 	return (
 		<>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-				<a href="https://hono.dev/" target="_blank">
-					<img src={honoLogo} className="logo cloudflare" alt="Hono logo" />
-				</a>
-				<a href="https://workers.cloudflare.com/" target="_blank">
-					<img
-						src={cloudflareLogo}
-						className="logo cloudflare"
-						alt="Cloudflare logo"
-					/>
-				</a>
-			</div>
-			<h1>Vite + React + Hono + Cloudflare</h1>
+			<h1>検索テスト</h1>
 			<div className="card">
-				<button
-					onClick={() => setCount((count) => count + 1)}
-					aria-label="increment"
-				>
-					count is {count}
+				<input
+					type="text"
+					value={keyword}
+					onChange={(e) => setKeyword(e.target.value)} // 入力されたら state を更新
+					placeholder="日本,山"
+				/>
+				<button onClick={handleSearch} aria-label="click">
+					Click
 				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
+
+				{/* ✅ ポイント3: 結果の表示。オブジェクトをそのまま出すと React は死ぬので注意 */}
+				<div style={{ marginTop: "20px", textAlign: "left" }}>
+					{results?.success ? (
+						results.results.length > 0 ? (
+							<ul>
+								{results.results.map((r, i) => (
+									<li key={i}>
+										<a href={r.url} target="_blank" rel="noreferrer">
+											{r.url}
+										</a>
+									</li>
+								))}
+							</ul>
+						) : (
+							<p>該当なし</p>
+						)
+					) : (
+						results?.message && (
+							<p style={{ color: "red" }}>{results.message}</p>
+						)
+					)}
+				</div>
 			</div>
-			<div className="card">
-				<button
-					onClick={() => {
-						fetch("/api/")
-							.then((res) => res.json() as Promise<{ name: string }>)
-							.then((data) => setName(data.name));
-					}}
-					aria-label="get name"
-				>
-					Name from API is: {name}
-				</button>
-				<p>
-					Edit <code>worker/index.ts</code> to change the name
-				</p>
-			</div>
-			<p className="read-the-docs">Click on the logos to learn more</p>
 		</>
 	);
 }
