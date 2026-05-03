@@ -16,6 +16,7 @@ export default defineConfig({
       reporter: ["text", "json", "html"],
     },
     exclude: [...configDefaults.exclude, "packages/template/*"],
+    environment: "jsdom",
     // browser: {
     //   enabled: true,
     //   provider: playwright(),

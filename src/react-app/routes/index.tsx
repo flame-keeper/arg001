@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
 	component: Index,
 });
 
-function Index() {
+export function Index() {
 	// inputの値を React の状態として管理する
 	const [keyword, setKeyword] = useState("");
 	const [results, setResults] = useState<SearchResponse | null>(null);
