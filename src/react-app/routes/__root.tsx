@@ -1,5 +1,6 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { SearchComponent } from "@/react-app/components/searchComponent";
 
 const RootLayout = () => (
   <>
@@ -9,6 +10,7 @@ const RootLayout = () => (
           <h1 className="text-xl font-black text-blue-600 tracking-tight">
             SPECIAL MEMORY
           </h1>
+          <SearchComponent />
           <ul className="flex space list-none gap-2">
             <li>
               <Link to="/" className="[&.active]:font-bold">
