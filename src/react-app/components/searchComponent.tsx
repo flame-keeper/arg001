@@ -7,8 +7,6 @@ type SearchResponse = {
   message?: string;
 };
 
-
-
 export function SearchComponent() {
   // inputの値を React の状態として管理する
   const [keyword, setKeyword] = useState("");
@@ -39,16 +37,20 @@ export function SearchComponent() {
         Click
       </button>
 
-      {/* ✅ ポイント3: 結果の表示。オブジェクトをそのまま出すと React は死ぬので注意 */}
-      <div style={{ marginTop: "20px", textAlign: "left" }}>
+      <div>
         {results?.success
           ? (
             results.results.length > 0
               ? (
-                <ul>
+                <ul className="list-none bg-black text-white bg-opacity-70 position-absolute px-2 py-1 min-w-full">
                   {results.results.map((r, i) => (
                     <li key={i}>
-                      <a href={r.url} target="_blank" rel="noreferrer">
+                      <a
+                        className="text-white"
+                        href={r.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         {r.url}
                       </a>
                     </li>

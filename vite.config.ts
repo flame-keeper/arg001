@@ -9,20 +9,20 @@ import UnoCSS from "unocss/vite";
 import { cloudflare } from "@cloudflare/vite-plugin";
 
 export default defineConfig({
-	plugins: [
-		tanstackRouter({
-			routesDirectory: "./src/react-app/routes",
-			generatedRouteTree: "./src/react-app/routeTree.gen.ts",
-			target: "react",
-			autoCodeSplitting: true,
-		}),
-		react(),
-		cloudflare(),
-		UnoCSS(),
-	],
-	resolve: {
-		alias: {
-			"@": path.resolve(__dirname, "./src"),
-		},
-	},
+  plugins: [
+    tanstackRouter({
+      routesDirectory: "./src/react-app/routes",
+      generatedRouteTree: "./src/react-app/routeTree.gen.ts",
+      target: "react",
+      autoCodeSplitting: true,
+    }),
+    react(),
+    cloudflare(),
+    UnoCSS(),
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 });

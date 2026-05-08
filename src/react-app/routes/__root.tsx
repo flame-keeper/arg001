@@ -10,7 +10,6 @@ const RootLayout = () => (
           <h1 className="text-xl font-black text-blue-600 tracking-tight">
             SPECIAL MEMORY
           </h1>
-          <SearchComponent />
           <ul className="flex space list-none gap-2">
             <li>
               <Link to="/" className="[&.active]:font-bold">
@@ -24,6 +23,7 @@ const RootLayout = () => (
             </li>
           </ul>
         </nav>
+        <SearchComponent />
       </header>
       <Outlet />{" "}
       {process.env.NODE_ENV === "development" && <TanStackRouterDevtools />}
