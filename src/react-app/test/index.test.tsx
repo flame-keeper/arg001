@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
 import { expect, test, describe, vi, beforeEach, afterEach } from "vitest";
-import { Index } from "./index";
+import { Index } from "@/react-app/routes/index";
 
 describe("Index Component", () => {
 	beforeEach(() => {
