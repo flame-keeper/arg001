@@ -28,10 +28,17 @@ export function SearchComponent() {
   return (
     <div className="card">
       <input
+        id="search-input"
         type="text"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)} // 入力されたら state を更新
         placeholder="日本,山"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSearch();
+          }
+        }}
       />
       <button type="button" onClick={handleSearch} aria-label="click">
         Click

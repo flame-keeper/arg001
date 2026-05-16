@@ -8,16 +8,16 @@ const RootLayout = () => (
       <header className="h-16 border-b border-slate-200 bg-white flex flex-justify-between items-center px-6">
         <nav className="flex justify-between w-auto gap-4">
           <h1 className="text-xl font-black text-blue-600 tracking-tight">
-            SPECIAL MEMORY
+            Telesma
           </h1>
-          <ul className="flex space list-none gap-2">
+          <ul className="flex space list-none gap-4">
             <li>
-              <Link to="/" className="[&.active]:font-bold">
+              <Link to="/" className="[&.active]:font-bold color-inherit decoration-none ">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/about" className="[&.active]:font-bold">
+              <Link to="/about" className="[&.active]:font-bold color-inherit decoration-none">
                 About
               </Link>
             </li>
