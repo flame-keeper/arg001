@@ -7,14 +7,24 @@ type SearchResponse = {
   message?: string;
 };
 
+const visibilityAtom = atom(false);
 const keywordAtom = atom("");
 const resultsAtom = atom<SearchResponse | null>(null);
 
 function ResultsList() {
+  const [setvisible] = useAtom(visibilityAtom);
   const [results, setResults] = useAtom(resultsAtom);
   return (
     <div className="border-rounded-lg bg-stone-300 bg-opacity-70 position-absolute px-2 py-2 w-80 top-8 position-right-0">
-      <button type="button" onClick={() => setResults(null)}>×</button>
+      <button
+        type="button"
+        onClick={() => {
+          setResults(null);
+          setvisible(false);
+        }}
+      >
+        ×
+      </button>
       <h1 className="m-0 mb-3 font-size-4 border border-b-1">検索結果</h1>
       <ul className="list-none m-0 p-0">
         {results?.success
@@ -47,8 +57,9 @@ function ResultsList() {
 }
 
 export function SearchComponent() {
+  const [visible, setvisible] = useAtom(visibilityAtom);
   const [keyword, setKeyword] = useAtom(keywordAtom);
-  const [results, setResults] = useAtom(resultsAtom);
+  const [setResults] = useAtom(resultsAtom);
 
   const handleSearch = async () => {
     if (!keyword) return;
@@ -58,6 +69,7 @@ export function SearchComponent() {
     try {
       const res = await fetch(url);
       const data = (await res.json()) as SearchResponse;
+      setvisible(true);
       setResults(data);
     } catch (e) {
       console.error("通信失敗", e);
@@ -82,7 +94,7 @@ export function SearchComponent() {
       <button type="button" onClick={handleSearch} aria-label="click">
         Click
       </button>
-      {results && <ResultsList />}
+      {visible && <ResultsList />}
     </div>
   );
 }
