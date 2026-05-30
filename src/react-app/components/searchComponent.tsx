@@ -83,7 +83,7 @@ export function SearchComponent() {
         type="text"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)} // 入力されたら state を更新
-        placeholder="日本,山"
+        placeholder="検索"
         tabIndex={0}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
