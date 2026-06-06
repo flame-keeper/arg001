@@ -12,9 +12,9 @@
     "publish": true
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.170.7",
+    "@tanstack/react-router": "^1.170.10",
     "@tanstack/react-router-devtools": "^1.167.0",
-    "@tanstack/router-vite-plugin": "^1.167.10",
+    "@tanstack/router-vite-plugin": "^1.167.13",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@unocss/reset": "^66.7.0",
@@ -30,7 +30,7 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.15.3",
     "@eslint/js": "9.39.1",
-    "@tanstack/router-plugin": "^1.168.10",
+    "@tanstack/router-plugin": "^1.168.13",
     "@types/node": "24.10.1",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
