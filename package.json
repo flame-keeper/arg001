@@ -57,5 +57,5 @@
     "coverage": "vitest run --coverage"
   },
   "type": "module",
-  "packageManager": "pnpm@11.1.2"
+  "packageManager": "pnpm@11.5.0"
 }
