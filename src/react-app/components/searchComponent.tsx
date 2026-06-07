@@ -12,7 +12,7 @@ const keywordAtom = atom("");
 const resultsAtom = atom<SearchResponse | null>(null);
 
 function ResultsList() {
-  const [setvisible] = useAtom(visibilityAtom);
+  const [, setvisible] = useAtom(visibilityAtom);
   const [results, setResults] = useAtom(resultsAtom);
   return (
     <div className="border-rounded-lg bg-stone-300 bg-opacity-70 position-absolute px-2 py-2 w-80 top-8 position-right-0">
@@ -59,7 +59,7 @@ function ResultsList() {
 export function SearchComponent() {
   const [visible, setvisible] = useAtom(visibilityAtom);
   const [keyword, setKeyword] = useAtom(keywordAtom);
-  const [setResults] = useAtom(resultsAtom);
+  const [, setResults] = useAtom(resultsAtom);
 
   const handleSearch = async () => {
     if (!keyword) return;
