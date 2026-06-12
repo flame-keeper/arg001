@@ -6,7 +6,6 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      // @ を src フォルダの絶対パスに解決する
       "@": path.resolve(__dirname, "./src"),
     },
   },
@@ -16,11 +15,23 @@ export default defineConfig({
       reporter: ["text", "json", "html"],
     },
     exclude: [...configDefaults.exclude, "packages/template/*"],
-    environment: "jsdom",
-    // browser: {
-    //   enabled: true,
-    //   provider: playwright(),
-    //   instances: [{ browser: "chromium" }],
-    // },
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: "react",
+          include: ["src/react-app/**/*.test.{ts,tsx}"],
+          environment: "jsdom",
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: "worker",
+          include: ["src/worker/**/*.test.ts"],
+          environment: "node",
+        },
+      },
+    ],
   },
 });
