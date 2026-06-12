@@ -14,7 +14,7 @@ describe("SearchComponent", () => {
 
 	test("renders initial state", () => {
 		render(<SearchComponent />);
-		expect(screen.getByPlaceholderText("日本,山")).toBeDefined();
+		expect(screen.getByPlaceholderText("検索")).toBeDefined();
 		expect(screen.getByRole("button", { name: "click" })).toBeDefined();
 	});
 
@@ -36,7 +36,7 @@ describe("SearchComponent", () => {
 		});
 
 		render(<SearchComponent />);
-		const input = screen.getByPlaceholderText("日本,山");
+		const input = screen.getByPlaceholderText("検索");
 		const button = screen.getByRole("button", { name: "click" });
 
 		fireEvent.change(input, { target: { value: "富士山" } });
@@ -60,7 +60,7 @@ describe("SearchComponent", () => {
 		});
 
 		render(<SearchComponent />);
-		const input = screen.getByPlaceholderText("日本,山");
+		const input = screen.getByPlaceholderText("検索");
 		const button = screen.getByRole("button", { name: "click" });
 
 		fireEvent.change(input, { target: { value: "none" } });
@@ -82,7 +82,7 @@ describe("SearchComponent", () => {
 		});
 
 		render(<SearchComponent />);
-		const input = screen.getByPlaceholderText("日本,山");
+		const input = screen.getByPlaceholderText("検索");
 		const button = screen.getByRole("button", { name: "click" });
 
 		fireEvent.change(input, { target: { value: "nothing" } });
