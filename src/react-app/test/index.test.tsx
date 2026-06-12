@@ -20,7 +20,7 @@ describe("SearchComponent", () => {
 
 	test("updates keyword on input change", () => {
 		render(<SearchComponent />);
-		const input = screen.getByPlaceholderText("日本,山") as HTMLInputElement;
+		const input = screen.getByPlaceholderText("検索") as HTMLInputElement;
 		fireEvent.change(input, { target: { value: "富士山" } });
 		expect(input.value).toBe("富士山");
 	});
